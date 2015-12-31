@@ -1,0 +1,54 @@
+.home {
+  background: url('images/home.jpg') no-repeat fixed center center / cover;
+  .overlay {
+    background: rgba(0,0,0, .7);
+    width: 100%;
+    height: 100%;
+  }
+  .inner {
+    padding-top: 64px;
+    display: table;
+    height: calc(100vh - 100px);
+    padding-top: 80px;
+    width: 100%;
+  }
+  .content {
+    color: #fff;
+    width: 100%;
+    height: 100%;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    .title {
+      font-size: 42px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      margin-top: 0;
+    }
+    .name {
+      color: #00bcd4;
+    }
+    .subtitle {
+      font-size: 14px;
+      font-weight: 300;
+      margin-top: 0;
+      margin-bottom: 38px;
+      text-transform: uppercase;
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .home .content {
+    .inner {
+      height: calc(100vh - 50px);
+    }
+    .title {
+      font-size: 72px;
+    }
+    .subtitle {
+      font-size: 18px;
+    }
+  }
+}

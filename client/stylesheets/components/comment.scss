@@ -1,0 +1,16 @@
+.comment-box{
+	width:100%;
+	margin:0 auto;
+	padding:2em;
+	border-top:1px solid #eee;
+	h3{
+		font-weight:500;
+		color:#00bcd4;
+	}
+}
+
+@media only screen and (min-width:768px) {
+	.comment-box{
+		width:45em;
+	}
+}

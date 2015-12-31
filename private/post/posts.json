@@ -1,0 +1,14 @@
+[
+      {
+        "id":1,
+        "post_name":"1-beauty",
+        "title":"First Meteor application!",
+        "data":"2015/11/16"
+      },
+      {
+        "id":2,
+        "post_name":"2-beast",
+        "title":"worf legend",
+        "data":"2015/11/15"
+      }
+]

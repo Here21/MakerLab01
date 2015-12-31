@@ -1,0 +1,22 @@
+body{
+	margin:0;
+	line-height:1.8;
+	-webkit-font-smoothing: antialiased;
+	font-family: "Helvetica Neue", "Segoe UI", Helvetica, Arial,"Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+	overflow-y:scroll;
+	height:100%;
+}
+
+*{
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+}
+
+.clearfix:before,.clearfix:after {
+	content:'';
+	display:table;
+}
+
+.clearfix:after {
+	clear:both;
+}
