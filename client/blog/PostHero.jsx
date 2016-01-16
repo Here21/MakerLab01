@@ -1,28 +1,26 @@
 PostHero = React.createClass({
   getInitialState() {
     return {
-      
-      projectData:{}
-    };
+      projectData: {}
+    }
   },
-  componentWillMount(nextProps) {
 
-   
-    console.log(this.props.project);
+  componentWillMount() {
     this.setState({ 
-      //postData: this.data.project
+
       projectData : this.props.project
-      //date : moment(projectData.createdAt).fromNow();
-      
+
     });
-    
-  
   },
+  getProjectName(projectInfo){
+    return projectInfo.projectInfo.projectname;
+  },
+
   render() {
     let styles = {
       root: {
         marginTop: 64,
-        backgroundColor: '#00bcd4',
+        backgroundColor: '#03a9f4',
         textAlign: 'center',
         paddingTop: '55px',
         paddingBottom: '55px',
@@ -34,20 +32,16 @@ PostHero = React.createClass({
         marginBottom: '7px',
         lineHeight: 1.1
       },
-      date: {
-        color: '#fff'
-      }
+      category: {
+        color: '#b6b6b6'
+      },
     };
 
-    
-    //console.log();
-    let title, date;
-   
-    //console.log(this.);
+    //console.log(this.state.projectData[0]);
     return (
       <div style={styles.root}>
-        <div className='Test' style={styles.title}>{title}</div>
-        <div className='TestTwo' style={styles.date}>{date}</div>
+        <div style={styles.title}>{this.getProjectName(this.state.projectData[0])}</div>
+        <p style={styles.category}># {this.state.projectData[0].projectInfo.category}</p>
       </div>
     );
   }

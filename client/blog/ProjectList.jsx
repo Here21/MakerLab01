@@ -16,9 +16,9 @@ ProjectList = React.createClass({
       return (
         <div className="item clearfix" key={project._id}>
           <Link to={`/project/${project._id}`}>
-            <div className="icon">{project.masterAccount}</div>
+            <div className="icon">{project.projectInfo.category}</div>
             <div className="title">{project.projectInfo.projectname}</div>
-            <div className="category">{project.projectInfo.category}</div>
+
             <div className="date">{this.getDate(project.createdAt)}</div>
           </Link>
         </div>

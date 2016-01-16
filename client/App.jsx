@@ -34,10 +34,10 @@ App = React.createClass({
 				textAlign: 'center'
 			},
 			p: {
-        		margin: '0 auto',
+
 	       		padding: 0,
         		color: 'rgba(255, 255, 255, 0.54)',
-        		fontSize: '1.5em',
+        		fontSize: '1.2em',
         		maxWidth: 500
      		}
 		}
@@ -60,7 +60,7 @@ App = React.createClass({
 
 				<div style={styles.footer}>
 					<p style={styles.p}>
-						 The beautiful attracts the beautiful
+						 ©大连东软信息学院 2015
 					</p>
 				</div>
 			</div>
