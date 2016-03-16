@@ -1,7 +1,7 @@
 const {
 	Paper,
 	Avatar
-} = mui;
+} = MUI;
 
 Comment = React.createClass({
 	getGravatar(){

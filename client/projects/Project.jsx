@@ -1,4 +1,4 @@
-const { Styles, CircularProgress } = mui;
+const { Styles, CircularProgress } = MUI;
 
 Project = React.createClass({
   mixins:[ReactMeteorData],
@@ -11,25 +11,11 @@ Project = React.createClass({
   },
 
   getMeteorData(){
-
     Meteor.subscribe('projects');
+    let projects = Collections.Projects.find().fetch();
     return {
-      projects:Projects.find({},{sort:{createdAt:1}}).fetch()
+      projects:projects
     };
-
-  },
-
-  componentWillMount() {
-    let that = this;
-
-    // Meteor.call('/blog/getPost', "posts", function(err, res){
-    //   if (err) {
-    //     console.log(`The post ${postName} does not exist!`);
-    //     return;
-    //   }
-    // that.setState({ posts: JSON.parse(res) });
-    // });
-    
   },
 
   componentDidMount(){

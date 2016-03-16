@@ -6,7 +6,7 @@ const {
 	FlatButton,
 	RaisedButton
 
-} = mui;
+} = MUI;
 
 ProjectForm = React.createClass({
 	getInitialState(){

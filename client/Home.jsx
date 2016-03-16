@@ -1,4 +1,4 @@
-const { RaisedButton } = mui;
+const { RaisedButton } = MUI;
 const { Link } = ReactRouter;
 
 Home = React.createClass({

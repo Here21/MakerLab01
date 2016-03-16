@@ -28,3 +28,9 @@ momentjs:moment
 accounts-base
 accounts-password
 reactrouter:react-router
+npm-bcrypt
+natestrauser:bootstrap-colorpicker
+aldeed:simple-schema
+msavin:mongol
+aldeed:collection2
+izzilab:material-ui@0.2.6

@@ -1,7 +1,7 @@
 const{ 
 	TextField,
 	RaisedButton
-} = mui;
+} = MUI;
 
 CommentForm = React.createClass({
 	_onSubmit(event){

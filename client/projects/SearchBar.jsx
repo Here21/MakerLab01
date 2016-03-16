@@ -1,4 +1,4 @@
-const { TextField } = mui;
+const { TextField } = MUI;
 
 SearchBar = React.createClass({
   getStyles() {
@@ -31,7 +31,7 @@ SearchBar = React.createClass({
     return (
       <div>
         <div style={styles.div}>
-          <SearchIcon style={styles.svg} />
+
         </div>
         <TextField
           ref="searchInput"

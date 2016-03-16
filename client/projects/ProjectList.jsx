@@ -7,18 +7,17 @@ ProjectList = React.createClass({
     return date;
   },
   render() {
-    console.log(this.props.projects);
+    //console.log(this.props.projects);
     //遍历list中的每个值，返回包含所有通过predicate真值检测的元素值。
     const projectItems = _.filter(this.props.projects, (project) => {
-      return project.projectInfo.projectname.indexOf(this.props.inputText) > -1;
+      return project.name.indexOf(this.props.inputText) > -1;
     })
     .map((project) => {
       return (
         <div className="item clearfix" key={project._id}>
           <Link to={`/project/${project._id}`}>
-            <div className="icon">{project.projectInfo.category}</div>
-            <div className="title">{project.projectInfo.projectname}</div>
-
+            <div className="icon">{project.category}</div>
+            <div className="title">{project.name}</div>
             <div className="date">{this.getDate(project.createdAt)}</div>
           </Link>
         </div>

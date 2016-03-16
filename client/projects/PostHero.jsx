@@ -4,18 +4,6 @@ PostHero = React.createClass({
       projectData: {}
     }
   },
-
-  componentWillMount() {
-    this.setState({ 
-
-      projectData : this.props.project
-
-    });
-  },
-  getProjectName(projectInfo){
-    return projectInfo.projectInfo.projectname;
-  },
-
   render() {
     let styles = {
       root: {
@@ -36,12 +24,12 @@ PostHero = React.createClass({
         color: '#b6b6b6'
       },
     };
-
-    //console.log(this.state.projectData[0]);
     return (
       <div style={styles.root}>
-        <div style={styles.title}>{this.getProjectName(this.state.projectData[0])}</div>
-        <p style={styles.category}># {this.state.projectData[0].projectInfo.category}</p>
+        <div style={styles.title}>{this.props.project[0].name}</div>
+        <p style={styles.category}>#{this.props.project[0].category}</p>
+        <p>{this.props.project[0].createdAt}</p>
+        <p>{this.props.project[0].member}</p>
       </div>
     );
   }

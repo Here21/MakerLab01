@@ -1,4 +1,4 @@
-const { Paper, Tabs, Tab } = mui;
+const { Paper, Tabs, Tab } = MUI;
 
 NavBarTabs = React.createClass({
    getInitialState() {

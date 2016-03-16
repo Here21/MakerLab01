@@ -1,4 +1,4 @@
-const { RaisedButton } = mui;
+const { RaisedButton } = MUI;
 
 Hello = React.createClass({
 	render(){
