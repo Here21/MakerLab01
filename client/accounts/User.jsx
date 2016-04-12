@@ -1,8 +1,8 @@
 const {
-  Paper,
   RaisedButton,
   Avatar,
-  Dialog
+  Tabs,
+  Tab
   } = MUI;
 
 const { Link } = ReactRouter;
@@ -16,27 +16,27 @@ User = React.createClass({
     }
   },
   getMeteorData() {
-    Meteor.subscribe("person", Meteor.userId());
-    let person = Collections.Person.find().fetch();
     Meteor.subscribe("myPost",Meteor.userId());
     console.log(Collections.Projects.find().fetch());
     return {
       currentUser: Meteor.user(),
-      userInfo:person,
       myProjects:Collections.Projects.find().fetch()
     };
   },
+  getGravatar(){
+    let md5Hash = Gravatar.hash(Meteor.user().emails[0].address);
+    return url = `http://gravatar.com/avatar/${md5Hash}.png?s=512&d=monsterid`
+  },
   render(){
     let styles = {
-      paper: {
-        width: '60%',
-        margin: '10rem auto',
-        maxWidth: '50rem',
-        padding: '0 3rem',
-        backgroundColor: '#BCE5FC',
-        textAlign: 'center',
+      wrap: {
         display: 'flex',
-        WebkitFlexDirection: 'column'
+        flexDirection: 'column',
+        WebkitJustifyContent: 'center',
+        WebkitAlignItems: 'center',
+        textAlign:'center',
+        height: '40rem',
+        padding: '5rem'
       },
       button: {
         margin: '1rem 1rem',
@@ -45,79 +45,46 @@ User = React.createClass({
     };
     return (
       <div>
-        <PersonalInfo key='person' open={this.state.open} handleOpen={this.handleOpen} handleClose={this.handleClose}/>
-        <Paper
-          zDepth={1}
-          style={styles.paper}>
-          <div style={{display: 'flex',WebkitJustifyContent: 'center', WebkitAlignItems: 'center',margin:'2rem 0'}}>
-            <Avatar
-              style={styles.avatar}
-              size={80}
-              src="images/circle-accounts.svg"/>
-            <div style={{width:"10rem"}}>
-              {
-                this.data.userInfo.length > 0 ?
-                  <div>
-                    <p>{this.data.userInfo[0].name}</p>
-                    <p>{this.data.userInfo[0].major}/{this.data.userInfo[0].grade}</p>
-                  </div>:<p>创客</p>
-              }
+        <div style={styles.wrap}>
+          <Avatar
+            style={styles.avatar}
+            size={80}
+            src={this.getGravatar()}/>
+          <div style={{width:"10rem",margin:'3rem 0'}}>
+            <div>
+              <h1 style={{color:"#2196F3"}}>{this.data.currentUser.profile.name}</h1>
+              <p>{this.data.currentUser.profile.grade}</p>
+              <p>{this.data.currentUser.profile.role}</p>
             </div>
           </div>
-          <div>
-            {
-              this.data.userInfo.length > 0 ?
-                <p>{this.data.userInfo[0].skill}</p> : ''
-            }
-          </div>
-          <div>
-            <RaisedButton
-              style={styles.button}
-              label="注销"
-              onClick={this._userLogOut}/>
-            {
-              this.data.userInfo.length > 0 ? "":
-              <RaisedButton
-                style={styles.button}
-                label="完善资料"
-                secondary={true}
-                onClick={this.handleOpen}/>
-            }
-          </div>
-        </Paper>
-        <Paper style={styles.paper} className="blog-list">
           <RaisedButton
             style={styles.button}
-            label="发布项目"
-            primary={true}
-            onClick={this.publicOpen}/>
-        {
-          this.data.myProjects.map((project) => {
-            return (
-              <div className="item clearfix" key={project._id}>
-                <Link to={`/project/${project._id}`}>
-                  <div className="icon">{project.category}</div>
-                  <div className="title">{project.name}</div>
-                  <div className="date">{project.createdAt}</div>
-                </Link>
-              </div>
-            );
+            label="注销"
+            onClick={this._userLogOut}/>
+        </div>
+        <div style={{width: '100%', height: '3rem', backgroundColor: '#b6b6b6', position: 'absolute'}}></div>
+        <Tabs
+          style={{display: 'flex', flexDirection: 'column', alignItems: 'center',backgroundColor:'#e6e6e6'}}
+          tabItemContainerStyle={{backgroundColor:'#b6b6b6',width:'20rem',zIndex: '1'}}
+          inkBarStyle={{zIndex:1}}
+          value={this.state.value}
+          onChange={this.handleChange}>
+          <Tab label="我的项目" value="a" >
+            <MyProject myProjects={this.data.myProjects} />
+          </Tab>
+          <Tab label="我的团队" value="b">
+            <MyTeam />
+          </Tab>
+        </Tabs>
 
-          })
-        }
-        </Paper>
       </div>
     )
   },
-  handleOpen(){
-    this.setState({open: true});
-  },
+
   handleClose(){
     this.setState({open: false});
   },
-  publicOpen(){
-    this.props.history.pushState(null, `user/${this.data.currentUser._id}`);
-  },
+
   _userLogOut(){
     Meteor.logout(function(error){
       return error;

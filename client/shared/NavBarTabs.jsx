@@ -9,9 +9,9 @@ NavBarTabs = React.createClass({
   },
   _getLabelName(){
     if (this._requireRoute() === '/user') {
-      return Meteor.user().username;
+      return Meteor.user().profile.name;
     }else{
-      return '登陆';
+      return '登录';
     }
   },
   render() {
@@ -66,6 +66,16 @@ NavBarTabs = React.createClass({
           <Tab
             style={styles.tab}
             value='3'
+            label='团队'
+            route='/team' />
+          <Tab
+            style={styles.tab}
+            value='4'
+            label='招募'
+            route='/join' />
+          <Tab
+            style={styles.tab}
+            value='5'
             label={this._getLabelName()}
             route={this._requireRoute()} />
         </Tabs>

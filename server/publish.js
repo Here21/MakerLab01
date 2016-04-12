@@ -20,9 +20,14 @@ Collections.Person.allow({
 	insert: hasLoggedIn
 });
 
-
-Meteor.publish('projects',function(){
-	return Collections.Projects.find();
+Meteor.publish('projects', function(selector, limit) {
+	if (selector === undefined && limit === undefined) {
+		return Collections.Projects.find();
+	} else if (limit === undefined) {
+		return Collections.Projects.find(selector);
+	} else {
+		return Collections.Projects.find(selector, {limit: limit});
+	}
 });
 
 Meteor.publish('projectPost',function(id){
@@ -35,7 +40,9 @@ Meteor.publish('myPost',function(id){
 
 
 Collections.Projects.allow({
-	insert: hasLoggedIn
+	insert: hasLoggedIn,
+	remove: hasLoggedIn,
+	update: hasLoggedIn
 });
 
 Meteor.publish("findNumber",function(username){

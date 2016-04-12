@@ -12,7 +12,7 @@ const Colors = MUI.Styles.Colors;
 
 const ADD_NUMBER_COUNT = 1;
 
-var members = [];
+var members = new Set();
 
 PublicProject = React.createClass({
   getInitialState(){
@@ -38,7 +38,7 @@ PublicProject = React.createClass({
       //}
     });
   },
-
+  // TODO:调整样式，间距和颜色，还有添加成员按钮
   render(){
     const styles = {
       wrap: {
@@ -69,9 +69,14 @@ PublicProject = React.createClass({
             <MenuItem value={"游戏"} primaryText="游戏"/>
             <MenuItem value={"其他"} primaryText="其他"/>
           </DropDownMenu>
+          <TextField
+            ref="brief"
+            hintText="请控制在30字以内"
+            onChange={this.checkTextLength}
+            floatingLabelText="项目简述"/>
           <MemberList memberCount={this.state.memberCount} getMembers={this.getMembers}/>
           <IconButton tooltip="添加队员" tooltipPosition="top-center" onClick={this.addNumber}>
-            <SvgIcons.ContentAddCircleOutline color={Colors.lightBlue700} onClick={this.addNumber}/>
+            <SvgIcons.ContentAddCircleOutline color={Colors.lightBlue700}/>
           </IconButton>
           <textarea ref='textarea' rows="50"/>
         </form>
@@ -89,6 +94,11 @@ PublicProject = React.createClass({
       </div>
     )
   },
+  checkTextLength(event){
+    if(event.target.value.length > 30){
+      alert("简述字数超过限制！")
+    }
+  },
   handleChange(e, index, value){
     this.setState({value: value})
   },
@@ -98,21 +108,29 @@ PublicProject = React.createClass({
     });
   },
   getMembers(value){
-    members.push(value.trim());
+    members.add(value);
   },
   onSubmit(){
+    let temp = [];
+    for (let item of members){
+      temp.push(item);
+    }
     let projectinfo = {};
     projectinfo.authorId = Meteor.userId();
     projectinfo.name = this.refs.name.getValue();
     projectinfo.category = this.state.value;
-    projectinfo.member = members;
+    projectinfo.member = temp;
+    projectinfo.state = 'closed';
+    projectinfo.brief = this.refs.brief.getValue();
     projectinfo.description = this.refs.textarea.value;
     projectinfo.createdAt = new Date();
-    try {
-      Collections.Projects.insert(projectinfo);
-      this.props.history.replaceState(null, '/home');
-    } catch (e){
-      console.log(e)
-    }
+
+    Collections.Projects.insert(projectinfo,(error) =>{
+      if (error){
+        alert(error);
+      }
+      this.props.history.replaceState(null, '/user');
+    });
+
   }
 });

@@ -3,7 +3,7 @@ const { Link } = ReactRouter;
 
 Home = React.createClass({
     getName(){
-        return Meteor.user().username;
+        return Meteor.user().profile.name;
     },
     hasLogin(){
         return Meteor.user() ? this.getName() : 'MakerLab';

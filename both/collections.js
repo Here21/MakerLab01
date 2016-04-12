@@ -53,6 +53,11 @@ Collections.Projects.attachSchema(new SimpleSchema({
     label:"项目类型",
     max:15
   },
+  brief:{
+    type:String,
+    label:"项目描述",
+    max:30
+  },
   description:{
     type:String,
     label:"项目描述"
@@ -62,8 +67,13 @@ Collections.Projects.attachSchema(new SimpleSchema({
     label:"成员",
     minCount: 0
   },
-  createdAt:{
+  state:{
     type:String,
+    label:"状态",
+    max:6
+  },
+  createdAt:{
+    type:Date,
     label:"创建时间",
     max:50
   }

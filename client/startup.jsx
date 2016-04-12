@@ -17,6 +17,8 @@ const Routes = (
 		<Route path="home" component={Home}/>
 		<Route path="login" component={Login}/>
 		<Route path="user" component={User}/>
+		<Route path="team" component={Team}/>
+		<Route path="join" component={Join}/>
 		<Route path="/user/:publish" component={PublicProject} />
 		<IndexRoute component = {Home}/>
 	</Route>

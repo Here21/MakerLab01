@@ -37,9 +37,9 @@ App = React.createClass({
       <div className="app-wrap">
         <NavBarTabs
           className="app-header"
-          onHandleTabsChange={this._handleTabsChange}
+          onHandleTabsChange={this.onHandleTabsChange}
           tabIndex={this.state.tabIndex}/>
-        <div className="app-content">
+        <div className="app-content" style={styles.content}>
         { this.props.children }
         </div>
         <div className="app-footer" style={styles.footer}>
@@ -53,10 +53,12 @@ App = React.createClass({
   _getSelectedIndex(){
     return this.props.history.isActive('/home') ? '1' :
       this.props.history.isActive('/project') ? '2' :
-        this.props.history.isActive('/login') ? '3' :
-          this.props.history.isActive('/user') ? '3' : '0';
+        this.props.history.isActive('/team') ? '3' :
+          this.props.history.isActive('/join') ? '4' :
+            this.props.history.isActive('/login') ? '5' :
+              this.props.history.isActive('/user') ? '5' : '0';
   },
-  _handleTabsChange(value, e, tab){
+  onHandleTabsChange(value, e, tab){
     this.props.history.pushState(null, tab.props.route);
     this.setState({tabIndex: this._getSelectedIndex()});
   },

@@ -14,7 +14,7 @@ CommentForm = React.createClass({
 		let website = this.refs.website.getValue();
 		let comment = this.refs.comment.getValue();
 		let postId = this.props.postId;
-		console.log(postId);
+		
 		Meteor.call('/comments/add',name,email,website,comment,postId,(err) => {
 			if (err){
 				console.log(err);
