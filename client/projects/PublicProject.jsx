@@ -3,23 +3,27 @@ const {
   MenuItem,
   TextField,
   FlatButton,
-  IconButton
-  } = MUI;
+  Dialog,
+  Paper
+} = MUI;
 
 const {SvgIcons} = MUI.Libs;
-
 const Colors = MUI.Styles.Colors;
 
-const ADD_NUMBER_COUNT = 1;
-
-var members = new Set();
-
 PublicProject = React.createClass({
+  mixins: [ReactMeteorData,ReactRouter.History],
   getInitialState(){
     return {
-      value: "移动互联网",
-      memberCount:ADD_NUMBER_COUNT,
-      munbers:[]
+      value: "电商",
+      team:undefined
+    }
+  },
+  getMeteorData(){
+    let id = Meteor.userId();
+    Meteor.subscribe('checkTeam', id);
+    let isCaptain = Collections.Team.find({captain: id}).fetch();
+    return {
+      team: isCaptain
     }
   },
   componentDidMount() {
@@ -38,6 +42,17 @@ PublicProject = React.createClass({
       //}
     });
   },
+  gotoCreateTeam() {
+    this.history.pushState(null, `/user/team/${Meteor.userId()}`);
+  },
+  checkTeam(){
+    return this.data.team.length !== 0 ? true : false;
+  },
+  selectTeam(value){
+    this.setState({
+      team:value
+    })
+  },
   // TODO:调整样式，间距和颜色，还有添加成员按钮
   render(){
     const styles = {
@@ -47,39 +62,84 @@ PublicProject = React.createClass({
         WebkitAlignItems: 'center',
         margin: '10rem'
       },
-      form:{
+      form: {
         display: 'flex',
         WebkitFlexDirection: 'column',
         WebkitAlignItems: 'center'
+      },
+      paper:{
+        width: '14rem',
+        height: '12rem',
+        display: 'flex',
+        flexDirection: 'column',
+        padding: '.5rem .5rem',
+        justifyContent: 'space-between',
+        fontSize: '12px',
+        alignItems: 'center',
+        marginBottom: '3rem'
+      },
+      buttongroup: {
+        display: 'flex',
+        width: '15rem',
+        justifyContent: 'space-between',
+        margin: '2rem'
       }
     };
+    let actions = [
+      <FlatButton
+        label="创建团队"
+        primary={true}
+        onTouchTap={this.gotoCreateTeam}/>,
+    ];
     return (
       <div style={styles.wrap}>
+        {this.checkTeam() ? '' :
+          <Dialog
+            title="团队检测"
+            actions={actions}
+            modal={true}
+            open>
+            由于您还没有团队，所以得先创建团队。
+          </Dialog>
+        }
         <form style={styles.form} onSubmit={this.onSubmit}>
           <TextField
             ref="name"
             floatingLabelText="项目名称"/>
           <DropDownMenu value={this.state.value} rer="category" onChange={this.handleChange}>
-            <MenuItem value={"移动互联网"} primaryText="移动互联网"/>
+            <MenuItem value={"电商"} primaryText="电商"/>
             <MenuItem value={"O2O"} primaryText="O2O"/>
-            <MenuItem value={"软件服务"} primaryText="软件服务"/>
-            <MenuItem value={"电子商务"} primaryText="电子商务"/>
-            <MenuItem value={"新媒体"} primaryText="新媒体"/>
-            <MenuItem value={"教育"} primaryText="教育"/>
+            <MenuItem value={"互联网金融"} primaryText="互联网金融"/>
+            <MenuItem value={"企业服务"} primaryText="企业服务"/>
+            <MenuItem value={"汽车服务"} primaryText="汽车服务"/>
+            <MenuItem value={"医疗健康"} primaryText="医疗健康"/>
+            <MenuItem value={"社交"} primaryText="社交"/>
+            <MenuItem value={"在线教育"} primaryText="在线教育"/>
+            <MenuItem value={"房产服务"} primaryText="房产服务"/>
+            <MenuItem value={"在线旅游"} primaryText="在线旅游"/>
+            <MenuItem value={"硬件"} primaryText="硬件"/>
             <MenuItem value={"游戏"} primaryText="游戏"/>
-            <MenuItem value={"其他"} primaryText="其他"/>
+            <MenuItem value={"广告营销"} primaryText="广告营销"/>
+            <MenuItem value={"文化体育娱乐"} primaryText="文化体育娱乐"/>
           </DropDownMenu>
           <TextField
+            style={{margin:'2rem'}}
             ref="brief"
             hintText="请控制在30字以内"
             onChange={this.checkTextLength}
             floatingLabelText="项目简述"/>
-          <MemberList memberCount={this.state.memberCount} getMembers={this.getMembers}/>
-          <IconButton tooltip="添加队员" tooltipPosition="top-center" onClick={this.addNumber}>
-            <SvgIcons.ContentAddCircleOutline color={Colors.lightBlue700}/>
-          </IconButton>
           <textarea ref='textarea' rows="50"/>
         </form>
+        {
+          this.data.team.length < 1 ? '' : <SelectTeam items={this.data.team} selectTeam={this.selectTeam}/>
+        }
+        {
+          this.state.team === undefined ? '' :
+            <Paper style={styles.paper} zDepth={this.state.zDepth}>
+              <h1 style={{margin: '0',color: '#03a9f4',overflowWrap: 'break-word'}}>{this.state.team.name}</h1>
+              <p style={{margin: '0',color: '#525457'}}>{'团队人数' + this.state.team.member}</p>
+            </Paper>
+        }
         <div>
           <FlatButton
             label="取消"
@@ -92,41 +152,29 @@ PublicProject = React.createClass({
             onTouchTap={this.onSubmit}/>
         </div>
       </div>
-    )
+    );
   },
   checkTextLength(event){
-    if(event.target.value.length > 30){
+    if (event.target.value.length > 30) {
       alert("简述字数超过限制！")
     }
   },
   handleChange(e, index, value){
     this.setState({value: value})
   },
-  addNumber(){
-    this.setState({
-      memberCount:this.state.memberCount + ADD_NUMBER_COUNT
-    });
-  },
-  getMembers(value){
-    members.add(value);
-  },
+  // TODO:onCancel function has not created
   onSubmit(){
-    let temp = [];
-    for (let item of members){
-      temp.push(item);
-    }
     let projectinfo = {};
     projectinfo.authorId = Meteor.userId();
     projectinfo.name = this.refs.name.getValue();
     projectinfo.category = this.state.value;
-    projectinfo.member = temp;
+    projectinfo.team = this.state.team.id;
     projectinfo.state = 'closed';
     projectinfo.brief = this.refs.brief.getValue();
     projectinfo.description = this.refs.textarea.value;
     projectinfo.createdAt = new Date();
-
-    Collections.Projects.insert(projectinfo,(error) =>{
-      if (error){
+    Collections.Projects.insert(projectinfo, (error) => {
+      if (error) {
         alert(error);
       }
       this.props.history.replaceState(null, '/user');

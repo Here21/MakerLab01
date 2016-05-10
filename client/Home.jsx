@@ -15,7 +15,7 @@ Home = React.createClass({
                     <div className="inner">
                         <div className="content">
                             <h1 className="title">
-                                hi! i&#39;m
+                                hi! Wellcome
                                 <span className="name">{this.hasLogin()}</span>
                             </h1>
                             <h2 className="subtitle">

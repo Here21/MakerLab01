@@ -13,7 +13,9 @@ MyTeam = React.createClass({
       paper:{
         width: '60rem',
         height: '35rem',
-        margin: '2.5rem auto'
+        margin: '2.5rem auto',
+        padding: '1rem 0',
+        overflowY: 'scroll'
       },
       add:{
         width:'4rem',
@@ -26,6 +28,9 @@ MyTeam = React.createClass({
         top: '-2rem'
       }
     };
+    const itemList = this.props.myTeam.map(item => {
+      return <TeamCartInUserPage key={item._id} item={item} />
+    });
     return(
       <Paper
         style={styles.paper}
@@ -35,10 +40,11 @@ MyTeam = React.createClass({
               <SvgIcons.ContentAdd color="#fff"/>
           </IconButton>
         </Paper>
+        {itemList}
       </Paper>
     )
   },
   publicOpen(){
-    this.history.pushState(null, `/user/${Meteor.userId()}`);
+    this.history.pushState(null, `/user/team/${Meteor.userId()}`);
   },
 });

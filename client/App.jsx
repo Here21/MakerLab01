@@ -28,6 +28,9 @@ App = React.createClass({
         color: 'rgba(255, 255, 255, 0.54)',
         fontSize: '1.2em',
         maxWidth: 500
+      },
+      content: {
+        minHeight: '40rem'
       }
     }
   },
@@ -39,7 +42,7 @@ App = React.createClass({
           className="app-header"
           onHandleTabsChange={this.onHandleTabsChange}
           tabIndex={this.state.tabIndex}/>
-        <div className="app-content" style={styles.content}>
+        <div className="app-content">
         { this.props.children }
         </div>
         <div className="app-footer" style={styles.footer}>

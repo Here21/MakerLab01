@@ -2,7 +2,7 @@ ProjectList = React.createClass({
   render() {
     const projectItems =this.props.projects.map((project) => {
       return (
-        <ProjectListCard key={project._id} item={project}/>
+        <DisplayCard key={project._id} item={project}/>
       );      
     });
 

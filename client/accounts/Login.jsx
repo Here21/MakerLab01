@@ -29,7 +29,6 @@ Login = React.createClass({
     );
   },
   onChangeState(value){
-    console.log(value);
     this.setState({
       onPage:value
     })

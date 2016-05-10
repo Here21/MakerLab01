@@ -16,11 +16,13 @@ User = React.createClass({
     }
   },
   getMeteorData() {
-    Meteor.subscribe("myPost",Meteor.userId());
-    console.log(Collections.Projects.find().fetch());
+    let userId = Meteor.userId();
+    Meteor.subscribe("myPost", userId);
+    Meteor.subscribe("checkTeam", userId);
     return {
       currentUser: Meteor.user(),
-      myProjects:Collections.Projects.find().fetch()
+      myProjects:Collections.Projects.find().fetch(),
+      myTeam:Collections.Team.find().fetch()
     };
   },
   getGravatar(){
@@ -73,7 +75,7 @@ User = React.createClass({
             <MyProject myProjects={this.data.myProjects} />
           </Tab>
           <Tab label="我的团队" value="b">
-            <MyTeam />
+            <MyTeam myTeam={this.data.myTeam} />
           </Tab>
         </Tabs>
 

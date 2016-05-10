@@ -3,7 +3,7 @@ const {
 } = MUI;
 const { Link } = ReactRouter;
 
-ProjectListCard = React.createClass({
+TeamDisplayCard = React.createClass({
   render(){
     let styles = {
       paper:{
@@ -31,17 +31,15 @@ ProjectListCard = React.createClass({
         justifyContent: 'space-between',
         alignItems: 'center'
       }
-    }
+    };
     return (
       <Paper style={styles.paper} zDepth={2}>
-        <Link style={styles.link} to={`/project/${this.props.item._id}`}>
+        <Link style={styles.link} to={`/team/${this.props.item._id}`}>
           <h1 style={{margin: '0',color: '#03a9f4',overflowWrap: 'break-word'}}>{this.props.item.name}</h1>
-          <p style={{margin: '0',color: '#FF4081',fontWeight: 800,fontSize: '18px'}}>{this.props.item.category}</p>
           <p style={{margin: '0',color: '#525457',fontStyle: 'italic'}}>{this.props.item.brief}</p>
-          <p style={{margin: '0',color: '#525457'}}>{'团队人数' + this.props.item.member.length}</p>
+          <p style={{margin: '0',color: '#525457'}}>{'团队人数:' + this.props.item.member.length}</p>
           <div style={{display: 'flex',alignItems: 'center',justifycontent: 'space-between',color: '#525457'}}>
             <p style={{margin: '0'}}>{moment(this.props.item.createdAt).fromNow()}</p>
-            <p style={{margin: '0'}}></p>
           </div>
         </Link>
       </Paper>

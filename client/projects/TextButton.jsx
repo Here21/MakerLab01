@@ -12,6 +12,7 @@ TextButton = React.createClass({
   },
   // TODO:replace the svgIcon and add disable attr
   render(){
+    // console.log(this.props.disabled);
     return(
       <div>
         <TextField
@@ -20,8 +21,12 @@ TextButton = React.createClass({
           underlineFocusStyle={{borderColor:this.props.changeColor()}}
           onChange={this.props.checkNumber}
           floatingLabelText="团队成员"/>
-        <IconButton tooltip="确认添加" tooltipPosition="top-center"  onClick={this.props.confirmToAdd}>
-          <SvgIcons.ContentAddCircleOutline color={Colors.lightBlue700}/>
+        <IconButton
+          tooltip="确认添加"
+          tooltipPosition="top-center"
+          disabled={this.props.disabled}
+          onClick={this.props.confirmToAdd}>
+          <SvgIcons.ActionDone color={Colors.lightBlue700}/>
         </IconButton>
       </div>
     )

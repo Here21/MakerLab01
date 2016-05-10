@@ -7,11 +7,27 @@ const {
 
 const {SvgIcons} = MUI.Libs;
 
-MyProjectListCard = React.createClass({
+ProjectCartInUserPage = React.createClass({
+  mixins: [ReactMeteorData],
+  getMeteorData() {
+    let teamId = this.props.item.team;
+    Meteor.subscribe("checkTeam", teamId);
+    // console.log(Collections.Team.findOne({_id:this.props.item.team}))
+    return {
+      team:Collections.Team.findOne({_id:this.props.item.team})
+    };
+  },
   getInitialState(){
     return{
-      stateText: '发布项目',
+      stateText: this.projectState(),
       stateColor: this.changeColor()
+    }
+  },
+  projectState(){
+    if(this.props.item.state === 'closed'){
+      return '发布项目';
+    } else if (this.props.item.state === 'open'){
+      return '关闭项目';
     }
   },
   render(){
@@ -40,15 +56,17 @@ MyProjectListCard = React.createClass({
             </IconButton>}
           >
             <MenuItem primaryText={this.state.stateText} onClick={this.projectPublish}/>
-            <MenuItem primaryText="发布招募" onClick={this.jobOffers}/>
             <MenuItem primaryText="修改信息" onClick={this.modifyInformation}/>
             <MenuItem primaryText="删除" onClick={this.deleteProject}/>
           </IconMenu>
         </div>
-        <div style={styles.line}>
-          <p>{'团队人数:' + this.props.item.member.length}</p>
-          <p>招募状态</p>
-        </div>
+        {
+          this.data.team !== undefined ?
+          <div style={styles.line}>
+            <p>{this.data.team.name}</p>
+            <p>{'团队人数:' + this.data.team.member.length}</p>
+          </div> : ''
+        }
         <div style={styles.line}>
           <p style={{color:'#525457',fontSize:'14px'}}>{'发布时间:' + moment(this.props.item.createdAt).format('YYYY MM DD')}</p>
           <p style={{color:this.state.stateColor,fontSize:'14px'}}>{'项目状态:' + this.props.item.state}</p>
@@ -75,9 +93,6 @@ MyProjectListCard = React.createClass({
       });
       Collections.Projects.update({_id: this.props.item._id},{$set: {state: 'closed'}});
     }
-  },
-  jobOffers(){
-
   },
   modifyInformation(){
 

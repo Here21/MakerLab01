@@ -7,18 +7,27 @@ const {SvgIcons} = MUI.Libs;
 
 MemberList = React.createClass({
   mixins:[ReactMeteorData],
+  getDefaultProps() {
+    return {
+      initDisabled: false
+    };
+  },
   getInitialState(){
     return {
       username:'',
-      disabled:true
+      disabled:this.props.initDisabled
     }
   },
   getMeteorData(){  
     Meteor.subscribe("findNumber",this.state.username);
     let user = Meteor.users.findOne({username:this.state.username});
+    
     return {
       users:user
     }
+  },
+  changeDisabledState(){
+    return this.data.users !== undefined ? false : true;
   },
   changeColor(){
     if(this.data.users !== undefined){
@@ -38,7 +47,13 @@ MemberList = React.createClass({
     let numbers = [];
     for (let i = 1; i<this.props.memberCount;i++){
       numbers.push(
-        <TextButton key={i} changeColor={this.changeColor} checkNumber={this.checkNumber} confirmToAdd={this.confirmToAdd}/>
+        <TextButton
+          key={i}
+          changeColor={this.changeColor}
+          checkNumber={this.checkNumber}
+          confirmToAdd={this.confirmToAdd}
+          disabled={this.changeDisabledState()}
+        />
       )
     }
     return(

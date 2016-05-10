@@ -21,7 +21,7 @@ NavBarTabs = React.createClass({
         height: 64,
         top: 0,
         right: 0,
-        zIndex: 4,
+        zIndex: 100,
         width: '100%',
         backgroundColor:'#0288D1'
       },
@@ -71,7 +71,7 @@ NavBarTabs = React.createClass({
           <Tab
             style={styles.tab}
             value='4'
-            label='招募'
+            label='指南'
             route='/join' />
           <Tab
             style={styles.tab}

@@ -61,17 +61,26 @@ SearchBar = React.createClass({
             <SvgIcons.ActionSearch />
           </IconButton>
         </form>
+        {
+          this.props.type === 'project' ?
         <DropDownMenu value={this.state.value} rer="category" onChange={this.onMenuHandleChange}>
           <MenuItem value="全部分类" primaryText="全部分类"/>
-          <MenuItem value="移动互联网" primaryText="移动互联网"/>
-          <MenuItem value="O2O" primaryText="O2O"/>
-          <MenuItem value="软件服务" primaryText="软件服务"/>
-          <MenuItem value="电子商务" primaryText="电子商务"/>
-          <MenuItem value="新媒体" primaryText="新媒体"/>
-          <MenuItem value="教育" primaryText="教育"/>
-          <MenuItem value="游戏" primaryText="游戏"/>
-          <MenuItem value="其他" primaryText="其他"/>
-        </DropDownMenu>
+          <MenuItem value={"电商"} primaryText="电商"/>
+          <MenuItem value={"O2O"} primaryText="O2O"/>
+          <MenuItem value={"互联网金融"} primaryText="互联网金融"/>
+          <MenuItem value={"企业服务"} primaryText="企业服务"/>
+          <MenuItem value={"汽车服务"} primaryText="汽车服务"/>
+          <MenuItem value={"医疗健康"} primaryText="医疗健康"/>
+          <MenuItem value={"社交"} primaryText="社交"/>
+          <MenuItem value={"在线教育"} primaryText="在线教育"/>
+          <MenuItem value={"房产服务"} primaryText="房产服务"/>
+          <MenuItem value={"在线旅游"} primaryText="在线旅游"/>
+          <MenuItem value={"硬件"} primaryText="硬件"/>
+          <MenuItem value={"游戏"} primaryText="游戏"/>
+          <MenuItem value={"广告营销"} primaryText="广告营销"/>
+          <MenuItem value={"文化体育娱乐"} primaryText="文化体育娱乐"/>
+        </DropDownMenu> : ''
+        }
       </div>
     );
   }

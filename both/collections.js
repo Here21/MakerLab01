@@ -62,15 +62,47 @@ Collections.Projects.attachSchema(new SimpleSchema({
     type:String,
     label:"项目描述"
   },
-  member:{
-    type:[String],
-    label:"成员",
-    minCount: 0
+  team:{
+    type:String,
+    label:"团队ID"
   },
   state:{
     type:String,
     label:"状态",
     max:6
+  },
+  createdAt:{
+    type:Date,
+    label:"创建时间",
+    max:50
+  }
+}));
+
+Collections.Team = new Mongo.Collection("team");
+Collections.Team.attachSchema(new SimpleSchema({
+  captain:{
+    type:String,
+    label:"队长",
+    max:30
+  },
+  name:{
+    type:String,
+    label:"团队名称",
+    max:50
+  },
+  brief:{
+    type:String,
+    label:"项目描述",
+    max:30
+  },
+  description:{
+    type:String,
+    label:"项目描述"
+  },
+  member:{
+    type:[String],
+    label:"团队ID",
+    minCount:1
   },
   createdAt:{
     type:Date,

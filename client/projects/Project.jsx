@@ -71,7 +71,7 @@ Project = React.createClass({
     };
     const projectItems =this.data.projects.map((project) => {
       return (
-        <ProjectListCard key={project._id} item={project}/>
+        <ProjectDisplayCard key={project._id} item={project}/>
       );
     });
 
@@ -83,6 +83,7 @@ Project = React.createClass({
             getCategorySelected={this.getCategorySelected}
             input={this.state.search}
             onChange={this.onChangeSearch}
+            type="project"
           />
         </div>
         <CircularProgress

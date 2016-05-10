@@ -3,13 +3,14 @@ const{
   RaisedButton
 } = MUI;
 LoginPage = React.createClass({
+  mixins:[ ReactRouter.History],
   render(){
     const styles = {
       textfield:{
         
       },
       button: {
-        
+        margin: '.5rem'
       }
     };
     return (
@@ -51,11 +52,10 @@ LoginPage = React.createClass({
 
     Meteor.loginWithPassword(username, password, (err)=> {
       if (err) {
-        console.log(err);
-        alert("failed");
+        alert(err.reason);
         return;
       } else {
-        this.props.history.replaceState(null, '/home');
+        this.history.pushState(null, '/user');
       }
     });
   }

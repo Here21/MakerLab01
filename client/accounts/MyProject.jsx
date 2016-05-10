@@ -29,14 +29,14 @@ MyProject = React.createClass({
       }
     };
     const itemList = this.props.myProjects.map(item => {
-      return <MyProjectListCard key={item._id} item={item} />
+      return <ProjectCartInUserPage key={item._id} item={item} />
     });
     return(
       <Paper
         style={styles.paper}
         zDepth={2}>
         <Paper style={styles.add} zDepth={2} circle={true}>
-          <IconButton tooltip="创建团队" touch={true} tooltipPosition="bottom-right" onClick={this.publicOpen}>
+          <IconButton tooltip="创建项目" touch={true} tooltipPosition="bottom-right" onClick={this.publicOpen}>
             <SvgIcons.ContentAdd color="#fff"/>
           </IconButton>
         </Paper>
@@ -45,6 +45,6 @@ MyProject = React.createClass({
     )
   },
   publicOpen(){
-    this.history.pushState(null, `/user/${Meteor.userId()}`);
+    this.history.pushState(null, `/user/project/${Meteor.userId()}`);
   },
 });
