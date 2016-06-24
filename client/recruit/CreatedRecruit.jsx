@@ -1,22 +1,25 @@
 const {
+  DropDownMenu,
+  MenuItem,
   TextField,
   FlatButton,
-  IconButton
+  Paper
 } = MUI;
+
 const {SvgIcons} = MUI.Libs;
 const Colors = MUI.Styles.Colors;
 
-const ADD_NUMBER_COUNT = 1;
-let members = new Set();
-CreateTeam = React.createClass({
-  getInitialState(){
+CreatedRecruit = React.createClass({
+  mixins: [ReactMeteorData,ReactRouter.History],
+  getMeteorData(){
+    let id = Meteor.userId();
+    Meteor.subscribe('checkTeam', id);
+    let isCaptain = Collections.Team.find({captain: id}).fetch();
     return {
-      memberCount:ADD_NUMBER_COUNT
+      team: isCaptain
     }
   },
   componentDidMount() {
-    members.add(Meteor.user().username);
-    // TODO:Anyway, the captain will be added,but need a inform to remind user
     var textbox = ReactDOM.findDOMNode(this.refs.textarea);
     this.editor = new Simditor({
       textarea: $(textbox),
@@ -31,8 +34,10 @@ CreateTeam = React.createClass({
       //  leaveConfirm: '正在上传文件'
       //}
     });
+
   },
-  render() {
+  // TODO:调整样式，间距和颜色，还有添加成员按钮
+  render(){
     const styles = {
       wrap: {
         display: 'flex',
@@ -40,36 +45,48 @@ CreateTeam = React.createClass({
         WebkitAlignItems: 'center',
         margin: '10rem'
       },
-      form:{
+      form: {
         display: 'flex',
         WebkitFlexDirection: 'column',
         WebkitAlignItems: 'center'
+      },
+      paper:{
+        width: '14rem',
+        height: '12rem',
+        display: 'flex',
+        flexDirection: 'column',
+        padding: '.5rem .5rem',
+        justifyContent: 'space-between',
+        fontSize: '12px',
+        alignItems: 'center',
+        marginBottom: '3rem'
+      },
+      buttongroup: {
+        display: 'flex',
+        width: '15rem',
+        justifyContent: 'space-between',
+        margin: '2rem'
       }
     };
     return (
       <div style={styles.wrap}>
         <form style={styles.form} onSubmit={this.onSubmit}>
           <TextField
-            ref="name"
-            floatingLabelText="团队名称"/>
+            ref="title"
+            floatingLabelText="招募标题"/>
           <TextField
-            ref="brief"
-            hintText="请控制在30字以内"
-            onChange={this.checkTextLength}
-            floatingLabelText="团队简介"/>
-          <MemberList memberCount={this.state.memberCount} getMembers={this.getMembers}/>
-          <IconButton tooltip="添加队员" style={{margin: '2rem'}} tooltipPosition="top-center" onClick={this.addNumber}>
-            <SvgIcons.ContentAddCircleOutline color={Colors.lightBlue700}/>
-          </IconButton>
+            ref="position"
+            floatingLabelText="招募职位"/>
+          <TextField
+            ref="benefit"
+            floatingLabelText="薪资/福利"/>
           <textarea ref='textarea' rows="50"/>
         </form>
-        <div style={{margin:'2rem'}}>
+        <div>
           <FlatButton
-            style={{marginRight:'1rem'}}
             label="取消"
             onTouchTap={this.onCancel}/>
           <FlatButton
-            style={{marginLeft:'1rem'}}
             label="确认"
             primary={true}
             type="submit"
@@ -79,36 +96,20 @@ CreateTeam = React.createClass({
       </div>
     );
   },
-  checkTextLength(event){
-    // TODO:More elegant way of checking
-    if(event.target.value.length > 30){
-      alert("简述字数超过限制！")
-    }
-  },
-  addNumber(){
-    this.setState({
-      memberCount:this.state.memberCount + ADD_NUMBER_COUNT
-    });
-  },
-  getMembers(value){
-    members.add(value);
-  },
+  // TODO:onCancel function has not created
   onSubmit(){
-    let temp = [];
-    for (let item of members){
-      temp.push(item);
-    }
-    let teamInfo = {};
-    teamInfo.captain = Meteor.userId();
-    teamInfo.name = this.refs.name.getValue();
-    teamInfo.member = temp;
-    teamInfo.brief = this.refs.brief.getValue();
-    teamInfo.description = this.refs.textarea.value;
-    teamInfo.createdAt = new Date();
-
-    Collections.Team.insert(teamInfo,(error) =>{
-      if (error){
-        alert(error.reason);
+    let recruitInfo = {};
+    recruitInfo.authorId = Meteor.userId();
+    recruitInfo.projectId = this.props.params.projectId;
+    recruitInfo.title = this.refs.title.getValue();
+    recruitInfo.benefit = this.refs.benefit.getValue();
+    recruitInfo.position = this.refs.position.getValue();
+    recruitInfo.state = 'on';
+    recruitInfo.description = this.refs.textarea.value;
+    recruitInfo.createdTime = new Date();
+    Collections.Recruit.insert(recruitInfo, (error) => {
+      if (error) {
+        alert(error);
       }
       this.props.history.replaceState(null, '/user');
     });

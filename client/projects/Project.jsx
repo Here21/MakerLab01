@@ -1,4 +1,3 @@
-const { Styles, CircularProgress } = MUI;
 const ITEMS_PER_PAGE = 16;
 Project = React.createClass({
   mixins:[ReactMeteorData],
@@ -8,7 +7,11 @@ Project = React.createClass({
       showItemDialog: false,
       snacks: null,
       itemsLimit: ITEMS_PER_PAGE,
-      category: ''
+      category: '',
+      sort: '',
+      department: '',
+      minDate: '',
+      maxDate: ''
     };
   },
   getMeteorData(){
@@ -16,16 +19,37 @@ Project = React.createClass({
     selector.state = 'open';
     if (this.state.search) selector.name = {$regex: '.*' + this.state.search + '.*'};
     if (this.state.category !== '') selector.category = this.state.category;
-    Meteor.subscribe('projects', selector, this.state.itemsLimit);
-    let projects = Collections.Projects.find().fetch();
+    if (this.state.sort !== '') selector.sort = this.state.sort;
+    if (this.state.department !== '') selector.department = this.state.department;
+    if (this.state.minDate !== '' && this.state.maxDate !== '') {
+      selector.createdAt = {
+        $gte: moment(this.state.minDate).startOf('day').toDate(),
+          $lte: moment(this.state.maxDate).endOf('day').toDate()
+      }
+    }
+    // TODO:排序，按时间倒序
+    let options = {limit: this.state.itemsLimit, sort: {createdAt: -1}};
+    Meteor.subscribe('projects', selector, options);
+    let projects = Collections.Projects.find(selector, options).fetch();
     return {
       projects:projects,
       itemsCount: Collections.Projects.find().count()
     };
   },
-  getCategorySelected(category) {
+  handleChangeMinDate (date) {
+    this.setState({
+      minDate: date
+    });
+  },
+
+  handleChangeMaxDate (date) {
+    this.setState({
+      maxDate: date
+    });
+  },
+  onSelectCategory(category) {
     let temp = category;
-    if (category === '全部分类') {
+    if (category === '全部') {
       temp = '';
     }
     this.setState({
@@ -34,14 +58,36 @@ Project = React.createClass({
     });
     window.scrollTo(0, 0);
   },
+  onSelectSort(sort) {
+    let temp = sort;
+    if (sort === '全部') {
+      temp = '';
+    }
+    this.setState({
+      sort: temp,
+      itemsLimit: ITEMS_PER_PAGE,
+    });
+    window.scrollTo(0, 0);
+  },
+  onSelectDepartment(department) {
+    let temp = department;
+    if (department === '全部') {
+      temp = '';
+    }
+    this.setState({
+      department: temp,
+      itemsLimit: ITEMS_PER_PAGE,
+    });
+    window.scrollTo(0, 0);
+  },
   onChangeSearch(value) {
     this.setState({search: value});
   },
-  componentDidMount(){
-    $(".loader").delay(600).fadeOut('slow',function(){
-      $(".blog-list").fadeIn('slow');
-    })
-  },
+  // componentDidMount(){
+  //   $(".loader").delay(600).fadeOut('slow',function(){
+  //     $(".blog-list").fadeIn('slow');
+  //   })
+  // },
 
   render() {
     let styles={
@@ -80,16 +126,20 @@ Project = React.createClass({
         <div style={styles.hero}>
           <div style={styles.title}>项目都在这里</div>
           <SearchBar
-            getCategorySelected={this.getCategorySelected}
             input={this.state.search}
             onChange={this.onChangeSearch}
             type="project"
           />
+          <DatePickerBar
+            handleChangeMinDate={this.handleChangeMinDate}
+            handleChangeMaxDate={this.handleChangeMaxDate}
+          />
+          <CategoryMenu
+            projectPage={true}
+            onSelectSort={this.onSelectSort}
+            onSelectDepartment={this.onSelectDepartment}
+            onSelectCategory={this.onSelectCategory}/>
         </div>
-        <CircularProgress
-          mode='indeterminate'
-          className='loader'
-          style={styles.circle}/>
         <div style={{display: 'flex',flexWrap: 'wrap',width: '60rem',margin: '1rem auto',minHeight: '80vh'}}>
           { projectItems }
         </div>
@@ -105,5 +155,5 @@ Project = React.createClass({
   },
   onShowMoreVisibilityChanged(isVisible) {
     if (isVisible) this.setState({itemsLimit: this.state.itemsLimit + ITEMS_PER_PAGE});
-  },
+  }
 });

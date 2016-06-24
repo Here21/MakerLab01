@@ -1,5 +1,5 @@
 const ITEMS_PER_PAGE = 16;
-Team = React.createClass({
+Recruit = React.createClass({
   mixins:[ReactMeteorData],
   getInitialState() {
     return {
@@ -13,12 +13,13 @@ Team = React.createClass({
   getMeteorData(){
     let selector = {};
     if (this.state.search) selector.name = {$regex: '.*' + this.state.search + '.*'};
+    if (this.state.category !== '') selector.category = this.state.category;
     let options = {limit: this.state.itemsLimit, sort: {createdAt: -1}};
-    Meteor.subscribe('teams', selector, options);
-    let teams = Collections.Team.find(selector, options).fetch();
+    Meteor.subscribe('recruits', selector, options);
+    let items = Collections.Recruit.find(selector, options).fetch();
     return {
-      teams:teams,
-      itemsCount: Collections.Team.find().count()
+      items: items,
+      itemsCount: Collections.Recruit.find().count()
     };
   },
   getCategorySelected(category) {
@@ -35,12 +36,6 @@ Team = React.createClass({
   onChangeSearch(value) {
     this.setState({search: value});
   },
-  componentDidMount(){
-    $(".loader").delay(600).fadeOut('slow',function(){
-      $(".blog-list").fadeIn('slow');
-    })
-  },
-
   render() {
     let styles={
       root:{
@@ -67,27 +62,22 @@ Team = React.createClass({
         display:'block'
       }
     };
-    const items =this.data.teams.map((team) => {
+    const items =this.data.items.map((item) => {
       return (
-        <TeamDisplayCard key={team._id} item={team}/>
+        <RecruitDisplayCard key={item._id} item={item}/>
       );
     });
 
     return (
       <div style={styles.root}>
         <div style={styles.hero}>
-          <div style={styles.title}>团队都在这里</div>
+          <div style={styles.title}>招募都在这里</div>
           <SearchBar
             getCategorySelected={this.getCategorySelected}
             input={this.state.search}
             onChange={this.onChangeSearch}
+            type="recruit"
           />
-          {/*
-          <CategoryMenu
-            onSelectSort={this.onSelectSort}
-            onSelectDepartment={this.onSelectDepartment}
-            onSelectCategory={this.onSelectCategory}/>
-          */}
         </div>
         <div style={{display: 'flex',flexWrap: 'wrap',width: '60rem',margin: '1rem auto',minHeight: '80vh'}}>
           { items }

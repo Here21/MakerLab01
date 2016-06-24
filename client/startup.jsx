@@ -19,9 +19,14 @@ const Routes = (
 		<Route path="login" component={Login}/>
 		<Route path="user" component={User}/>
 		<Route path="team" component={Team}/>
-		<Route path="join" component={Join}/>
+		<Route path="info" component={Join}/>
+		<Route path="recruit" component={Recruit}/>
+		<Route path="/recruit/:projectId" component={RecruitPost}/>
+		<Route path="/user/recruit/:projectId" component={CreatedRecruit}/>
 		<Route path="/user/project/:publish" component={PublicProject} />
 		<Route path="/user/team/:create" component={CreateTeam} />
+		<Route path="/modify/project/:projectId" component={ModifyProject} />
+		<Route path="/modify/team/:teamId" component={ModifyTeam} />
 		<IndexRoute component = {Home}/>
 	</Route>
 );

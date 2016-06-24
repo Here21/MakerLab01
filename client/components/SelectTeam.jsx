@@ -16,7 +16,6 @@ SelectTeam = React.createClass({
     this.setState({open: false});
   },
   onChangeTeam(value){
-    console.log(value);
     this.props.selectTeam(value);
   },
   render() {

@@ -1,9 +1,4 @@
-const {
-  TextField,
-  IconButton
-  } = MUI;
 const Colors = MUI.Styles.Colors;
-const {SvgIcons} = MUI.Libs;
 
 MemberList = React.createClass({
   mixins:[ReactMeteorData],

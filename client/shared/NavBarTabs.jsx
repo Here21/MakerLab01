@@ -71,8 +71,13 @@ NavBarTabs = React.createClass({
           <Tab
             style={styles.tab}
             value='4'
+            label='招募'
+            route='/recruit' />
+          <Tab
+            style={styles.tab}
+            value='6'
             label='指南'
-            route='/join' />
+            route='/info' />
           <Tab
             style={styles.tab}
             value='5'

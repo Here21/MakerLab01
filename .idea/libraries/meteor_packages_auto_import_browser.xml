@@ -2,8 +2,13 @@
   <library name="meteor-packages-auto-import-browser" type="javaScript">
     <properties>
       <sourceFilesUrls>
+        <item url="file://$USER_HOME$/.meteor/packages/cfs_standard-packages/0.5.9/web.browser/packages/cfs_standard-packages.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/cfs_storage-adapter/0.2.3/web.browser/packages/cfs_storage-adapter.js" />
         <item url="file://$USER_HOME$/.meteor/packages/diff-sequence/1.0.1/web.browser/diff.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/cfs_tempstore/0.1.5/web.browser/packages/cfs_tempstore.js" />
         <item url="file://$USER_HOME$/.meteor/packages/ecmascript-runtime/0.2.6/web.browser/.npm/package/node_modules/meteor-ecmascript-runtime/client.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/cfs_upload-http/0.0.20/web.browser/packages/cfs:upload-http.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/cfs_worker/0.1.4/web.browser/packages/cfs:worker.js" />
         <item url="file://$USER_HOME$/.meteor/packages/ejson/1.0.7/web.browser/stringify.js" />
         <item url="file://$USER_HOME$/.meteor/packages/ejson/1.0.7/web.browser/ejson.js" />
         <item url="file://$USER_HOME$/.meteor/packages/fastclick/1.0.7/web.browser/pre.js" />
@@ -48,19 +53,24 @@
         <item url="file://$USER_HOME$/.meteor/packages/http/1.1.1/web.browser/httpcall_common.js" />
         <item url="file://$USER_HOME$/.meteor/packages/http/1.1.1/web.browser/httpcall_client.js" />
         <item url="file://$USER_HOME$/.meteor/packages/idorecall_email-normalize/1.0.0/web.browser/packages/idorecall_email-normalize.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/cfs_access-point/0.1.49/web.browser/packages/cfs_access-point.js" />
         <item url="file://$USER_HOME$/.meteor/packages/lai_collection-extensions/0.1.4/web.browser/packages/lai_collection-extensions.js" />
         <item url="file://$USER_HOME$/.meteor/packages/babel-runtime/0.1.4/web.browser/babel-runtime.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/cfs_base-package/0.0.30/web.browser/packages/cfs_base-package.js" />
         <item url="file://$USER_HOME$/.meteor/packages/jparker_crypto-md5/0.1.1/web.browser/packages/jparker:crypto-md5.js" />
         <item url="file://$USER_HOME$/.meteor/packages/base64/1.0.4/web.browser/base64.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/cfs_collection/0.5.5/web.browser/packages/cfs_collection.js" />
         <item url="file://$USER_HOME$/.meteor/packages/jparker_gravatar/0.4.1/web.browser/packages/jparker_gravatar.js" />
         <item url="file://$USER_HOME$/.meteor/packages/binary-heap/1.0.4/web.browser/min-max-heap.js" />
         <item url="file://$USER_HOME$/.meteor/packages/binary-heap/1.0.4/web.browser/min-heap.js" />
         <item url="file://$USER_HOME$/.meteor/packages/binary-heap/1.0.4/web.browser/max-heap.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/cfs_collection-filters/0.2.4/web.browser/packages/cfs:collection-filters.js" />
         <item url="file://$USER_HOME$/.meteor/packages/meteortoys_toykit/2.2.1/web.browser/style/toykit.css" />
         <item url="file://$USER_HOME$/.meteor/packages/meteortoys_toykit/2.2.1/web.browser/lib/collections.js" />
         <item url="file://$USER_HOME$/.meteor/packages/blaze/2.1.3/web.browser/dombackend.js" />
         <item url="file://$USER_HOME$/.meteor/packages/momentjs_moment/2.10.6/web.browser/packages/momentjs_moment.js" />
         <item url="file://$USER_HOME$/.meteor/packages/blaze/2.1.3/web.browser/view.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/cfs_data-man/0.0.6/web.browser/packages/cfs:data-man.js" />
         <item url="file://$USER_HOME$/.meteor/packages/blaze/2.1.3/web.browser/materializer.js" />
         <item url="file://$USER_HOME$/.meteor/packages/blaze/2.1.3/web.browser/template.js" />
         <item url="file://$USER_HOME$/.meteor/packages/natestrauser_bootstrap-colorpicker/0.1.1/web.browser/packages/natestrauser:bootstrap-colorpicker/path-override.css" />
@@ -75,6 +85,7 @@
         <item url="file://$USER_HOME$/.meteor/packages/id-map/1.0.4/web.browser/id-map.js" />
         <item url="file://$USER_HOME$/.meteor/packages/natestrauser_bootstrap-colorpicker/0.1.1/web.browser/packages/natestrauser:bootstrap-colorpicker/lib/bootstrap-colorpicker/css/bootstrap-colorpicker.css" />
         <item url="file://$USER_HOME$/.meteor/packages/blaze/2.1.3/web.browser/preamble.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/cfs_http-methods/0.0.32/web.browser/http.methods.client.api.js" />
         <item url="file://$USER_HOME$/.meteor/packages/blaze/2.1.3/web.browser/domrange.js" />
         <item url="file://$USER_HOME$/.meteor/packages/raix_eventemitter/0.1.3/web.browser/packages/raix_eventemitter.js" />
         <item url="file://$USER_HOME$/.meteor/packages/jquery/1.11.4/web.browser/jquery.js" />
@@ -120,6 +131,7 @@
         <item url="file://$USER_HOME$/.meteor/packages/callback-hook/1.0.4/web.browser/hook.js" />
         <item url="file://$USER_HOME$/.meteor/packages/random/1.0.5/web.browser/random.js" />
         <item url="file://$USER_HOME$/.meteor/packages/srp/1.0.4/web.browser/biginteger.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/cfs_file/0.1.17/web.browser/packages/cfs_file.js" />
         <item url="file://$USER_HOME$/.meteor/packages/srp/1.0.4/web.browser/srp.js" />
         <item url="file://$USER_HOME$/.meteor/packages/check/1.1.0/web.browser/match.js" />
         <item url="file://$USER_HOME$/.meteor/packages/rate-limit/1.0.0/web.browser/rate-limit.js" />
@@ -143,12 +155,14 @@
         <item url="file://$USER_HOME$/.meteor/packages/ddp-client/1.2.1/web.browser/livedata_common.js" />
         <item url="file://$USER_HOME$/.meteor/packages/launch-screen/1.0.4/web.browser/mobile-launch-screen.js" />
         <item url="file://$USER_HOME$/.meteor/packages/ddp-client/1.2.1/web.browser/client_convenience.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/cfs_filesystem/0.1.2/web.browser/packages/cfs:filesystem.js" />
         <item url="file://$USER_HOME$/.meteor/packages/ddp-client/1.2.1/web.browser/id_map.js" />
         <item url="file://$USER_HOME$/.meteor/packages/retry/1.0.4/web.browser/retry.js" />
         <item url="file://$USER_HOME$/.meteor/packages/accounts-password/1.1.4/web.browser/password_client.js" />
         <item url="file://$USER_HOME$/.meteor/packages/service-configuration/1.0.5/web.browser/service_configuration_common.js" />
         <item url="file://$USER_HOME$/.meteor/packages/session/1.1.1/web.browser/session.js" />
         <item url="file://$USER_HOME$/.meteor/packages/spacebars/1.0.7/web.browser/spacebars-runtime.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/cfs_graphicsmagick/0.0.18/web.browser/packages/cfs:graphicsmagick.js" />
         <item url="file://$USER_HOME$/.meteor/packages/spacebars-compiler/1.0.7/web.browser/react.js" />
         <item url="file://$USER_HOME$/.meteor/packages/spacebars-compiler/1.0.7/web.browser/templatetag.js" />
         <item url="file://$USER_HOME$/.meteor/packages/spacebars-compiler/1.0.7/web.browser/compiler.js" />
@@ -173,12 +187,21 @@
         <item url="file://$USER_HOME$/.meteor/packages/underscore/1.0.4/web.browser/post.js" />
         <item url="file://$USER_HOME$/.meteor/packages/url/1.0.5/web.browser/url_common.js" />
         <item url="file://$USER_HOME$/.meteor/packages/url/1.0.5/web.browser/url_client.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/cfs_http-publish/0.0.13/web.browser/packages/cfs:http-publish.js" />
         <item url="file://$USER_HOME$/.meteor/packages/webapp/1.2.3/web.browser/webapp_client.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/cfs_power-queue/0.9.11/web.browser/packages/cfs:power-queue.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/cfs_reactive-list/0.0.9/web.browser/packages/cfs:reactive-list.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/cfs_reactive-property/0.0.4/web.browser/packages/cfs:reactive-property.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
+      <root url="file://$USER_HOME$/.meteor/packages/cfs_standard-packages/0.5.9/web.browser/packages/cfs_standard-packages.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/cfs_storage-adapter/0.2.3/web.browser/packages/cfs_storage-adapter.js" />
       <root url="file://$USER_HOME$/.meteor/packages/diff-sequence/1.0.1/web.browser/diff.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/cfs_tempstore/0.1.5/web.browser/packages/cfs_tempstore.js" />
       <root url="file://$USER_HOME$/.meteor/packages/ecmascript-runtime/0.2.6/web.browser/.npm/package/node_modules/meteor-ecmascript-runtime/client.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/cfs_upload-http/0.0.20/web.browser/packages/cfs:upload-http.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/cfs_worker/0.1.4/web.browser/packages/cfs:worker.js" />
       <root url="file://$USER_HOME$/.meteor/packages/ejson/1.0.7/web.browser/stringify.js" />
       <root url="file://$USER_HOME$/.meteor/packages/ejson/1.0.7/web.browser/ejson.js" />
       <root url="file://$USER_HOME$/.meteor/packages/fastclick/1.0.7/web.browser/pre.js" />
@@ -223,19 +246,24 @@
       <root url="file://$USER_HOME$/.meteor/packages/http/1.1.1/web.browser/httpcall_common.js" />
       <root url="file://$USER_HOME$/.meteor/packages/http/1.1.1/web.browser/httpcall_client.js" />
       <root url="file://$USER_HOME$/.meteor/packages/idorecall_email-normalize/1.0.0/web.browser/packages/idorecall_email-normalize.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/cfs_access-point/0.1.49/web.browser/packages/cfs_access-point.js" />
       <root url="file://$USER_HOME$/.meteor/packages/lai_collection-extensions/0.1.4/web.browser/packages/lai_collection-extensions.js" />
       <root url="file://$USER_HOME$/.meteor/packages/babel-runtime/0.1.4/web.browser/babel-runtime.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/cfs_base-package/0.0.30/web.browser/packages/cfs_base-package.js" />
       <root url="file://$USER_HOME$/.meteor/packages/jparker_crypto-md5/0.1.1/web.browser/packages/jparker:crypto-md5.js" />
       <root url="file://$USER_HOME$/.meteor/packages/base64/1.0.4/web.browser/base64.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/cfs_collection/0.5.5/web.browser/packages/cfs_collection.js" />
       <root url="file://$USER_HOME$/.meteor/packages/jparker_gravatar/0.4.1/web.browser/packages/jparker_gravatar.js" />
       <root url="file://$USER_HOME$/.meteor/packages/binary-heap/1.0.4/web.browser/min-max-heap.js" />
       <root url="file://$USER_HOME$/.meteor/packages/binary-heap/1.0.4/web.browser/min-heap.js" />
       <root url="file://$USER_HOME$/.meteor/packages/binary-heap/1.0.4/web.browser/max-heap.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/cfs_collection-filters/0.2.4/web.browser/packages/cfs:collection-filters.js" />
       <root url="file://$USER_HOME$/.meteor/packages/meteortoys_toykit/2.2.1/web.browser/style/toykit.css" />
       <root url="file://$USER_HOME$/.meteor/packages/meteortoys_toykit/2.2.1/web.browser/lib/collections.js" />
       <root url="file://$USER_HOME$/.meteor/packages/blaze/2.1.3/web.browser/dombackend.js" />
       <root url="file://$USER_HOME$/.meteor/packages/momentjs_moment/2.10.6/web.browser/packages/momentjs_moment.js" />
       <root url="file://$USER_HOME$/.meteor/packages/blaze/2.1.3/web.browser/view.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/cfs_data-man/0.0.6/web.browser/packages/cfs:data-man.js" />
       <root url="file://$USER_HOME$/.meteor/packages/blaze/2.1.3/web.browser/materializer.js" />
       <root url="file://$USER_HOME$/.meteor/packages/blaze/2.1.3/web.browser/template.js" />
       <root url="file://$USER_HOME$/.meteor/packages/natestrauser_bootstrap-colorpicker/0.1.1/web.browser/packages/natestrauser:bootstrap-colorpicker/path-override.css" />
@@ -250,6 +278,7 @@
       <root url="file://$USER_HOME$/.meteor/packages/id-map/1.0.4/web.browser/id-map.js" />
       <root url="file://$USER_HOME$/.meteor/packages/natestrauser_bootstrap-colorpicker/0.1.1/web.browser/packages/natestrauser:bootstrap-colorpicker/lib/bootstrap-colorpicker/css/bootstrap-colorpicker.css" />
       <root url="file://$USER_HOME$/.meteor/packages/blaze/2.1.3/web.browser/preamble.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/cfs_http-methods/0.0.32/web.browser/http.methods.client.api.js" />
       <root url="file://$USER_HOME$/.meteor/packages/blaze/2.1.3/web.browser/domrange.js" />
       <root url="file://$USER_HOME$/.meteor/packages/raix_eventemitter/0.1.3/web.browser/packages/raix_eventemitter.js" />
       <root url="file://$USER_HOME$/.meteor/packages/jquery/1.11.4/web.browser/jquery.js" />
@@ -295,6 +324,7 @@
       <root url="file://$USER_HOME$/.meteor/packages/callback-hook/1.0.4/web.browser/hook.js" />
       <root url="file://$USER_HOME$/.meteor/packages/random/1.0.5/web.browser/random.js" />
       <root url="file://$USER_HOME$/.meteor/packages/srp/1.0.4/web.browser/biginteger.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/cfs_file/0.1.17/web.browser/packages/cfs_file.js" />
       <root url="file://$USER_HOME$/.meteor/packages/srp/1.0.4/web.browser/srp.js" />
       <root url="file://$USER_HOME$/.meteor/packages/check/1.1.0/web.browser/match.js" />
       <root url="file://$USER_HOME$/.meteor/packages/rate-limit/1.0.0/web.browser/rate-limit.js" />
@@ -318,12 +348,14 @@
       <root url="file://$USER_HOME$/.meteor/packages/ddp-client/1.2.1/web.browser/livedata_common.js" />
       <root url="file://$USER_HOME$/.meteor/packages/launch-screen/1.0.4/web.browser/mobile-launch-screen.js" />
       <root url="file://$USER_HOME$/.meteor/packages/ddp-client/1.2.1/web.browser/client_convenience.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/cfs_filesystem/0.1.2/web.browser/packages/cfs:filesystem.js" />
       <root url="file://$USER_HOME$/.meteor/packages/ddp-client/1.2.1/web.browser/id_map.js" />
       <root url="file://$USER_HOME$/.meteor/packages/retry/1.0.4/web.browser/retry.js" />
       <root url="file://$USER_HOME$/.meteor/packages/accounts-password/1.1.4/web.browser/password_client.js" />
       <root url="file://$USER_HOME$/.meteor/packages/service-configuration/1.0.5/web.browser/service_configuration_common.js" />
       <root url="file://$USER_HOME$/.meteor/packages/session/1.1.1/web.browser/session.js" />
       <root url="file://$USER_HOME$/.meteor/packages/spacebars/1.0.7/web.browser/spacebars-runtime.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/cfs_graphicsmagick/0.0.18/web.browser/packages/cfs:graphicsmagick.js" />
       <root url="file://$USER_HOME$/.meteor/packages/spacebars-compiler/1.0.7/web.browser/react.js" />
       <root url="file://$USER_HOME$/.meteor/packages/spacebars-compiler/1.0.7/web.browser/templatetag.js" />
       <root url="file://$USER_HOME$/.meteor/packages/spacebars-compiler/1.0.7/web.browser/compiler.js" />
@@ -348,7 +380,11 @@
       <root url="file://$USER_HOME$/.meteor/packages/underscore/1.0.4/web.browser/post.js" />
       <root url="file://$USER_HOME$/.meteor/packages/url/1.0.5/web.browser/url_common.js" />
       <root url="file://$USER_HOME$/.meteor/packages/url/1.0.5/web.browser/url_client.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/cfs_http-publish/0.0.13/web.browser/packages/cfs:http-publish.js" />
       <root url="file://$USER_HOME$/.meteor/packages/webapp/1.2.3/web.browser/webapp_client.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/cfs_power-queue/0.9.11/web.browser/packages/cfs:power-queue.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/cfs_reactive-list/0.0.9/web.browser/packages/cfs:reactive-list.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/cfs_reactive-property/0.0.4/web.browser/packages/cfs:reactive-property.js" />
     </CLASSES>
     <SOURCES />
   </library>

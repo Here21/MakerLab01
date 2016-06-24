@@ -3,28 +3,32 @@ const {
   MenuItem,
   TextField,
   FlatButton,
-  Dialog,
   Paper
 } = MUI;
 
 const {SvgIcons} = MUI.Libs;
 const Colors = MUI.Styles.Colors;
 
-PublicProject = React.createClass({
+ModifyProject = React.createClass({
   mixins: [ReactMeteorData,ReactRouter.History],
   getInitialState(){
     return {
-      category: "电商",
-      sort: '创新创业',
-      team: undefined
+      value: '',
+      team:undefined
     }
   },
   getMeteorData(){
-    let id = Meteor.userId();
-    Meteor.subscribe('checkTeam', id);
-    let isCaptain = Collections.Team.find({captain: id}).fetch();
+    let id = this.props.params.projectId;
+    Meteor.subscribe('projectPost', id);
+    let post = Collections.Projects.findOne({_id: id});
+    // console.log(post);
+    // let image = post.imageFile;
+    // // console.log(image);
+    // Meteor.subscribe('image', image);
+    // let files = Collections.ProjectImages.find().fetch();
+    // console.log(files[0].url({store: 'project-image'}));
     return {
-      team: isCaptain
+      post: post
     }
   },
   componentDidMount() {
@@ -34,32 +38,38 @@ PublicProject = React.createClass({
       placeholder: '这里输入内容...',
       toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color',
         'ol', 'ul', 'blockquote', 'code', 'table', 'link', 'indent', 'outdent', 'alignment', 'hr'],
-      // upload: {
-      //  url: 'testUpload', //文件上传的接口地址
+      //upload: {
+      //  url: '', //文件上传的接口地址
       //  params: null, //键值对,指定文件上传接口的额外参数,上传的时候随文件一起提交
       //  fileKey: 'fileDataFileName', //服务器端获取文件数据的参数名
       //  connectionCount: 3,
       //  leaveConfirm: '正在上传文件'
-      // }
+      //}
     });
-    
-  },
-  testUpload(value){
-    console.log(value);
-  },
-  gotoCreateTeam() {
-    this.history.pushState(null, `/user/team/${Meteor.userId()}`);
-  },
-  checkTeam(){
-    return this.data.team.length !== 0 ? true : false;
-  },
-  selectTeam(value){
+    this.editor.setValue(this.data.post.description);
     this.setState({
-      team:value
-    })
+      value: this.data.post.category
+    });
   },
+
   // TODO:调整样式，间距和颜色，还有添加成员按钮
   render(){
+    let name;
+    let brief;
+    if (this.data.post !== undefined){
+      // this.editor.setValue(this.data.post.description);
+      name =  <TextField
+                ref="name"
+                defaultValue={this.data.post.name}
+                floatingLabelText="项目名称"/>
+      brief = <TextField
+                style={{margin:'2rem'}}
+                ref="brief"
+                defaultValue={this.data.post.brief}
+                hintText="请控制在30字以内"
+                onChange={this.checkTextLength}
+                floatingLabelText="项目简述"/>
+    };
     const styles = {
       wrap: {
         display: 'flex',
@@ -88,22 +98,8 @@ PublicProject = React.createClass({
         width: '15rem',
         justifyContent: 'space-between',
         margin: '2rem'
-      },
-      exampleImageInput: {
-        cursor: 'pointer',
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        right: 0,
-        left: 0,
-        width: '100%',
-        opacity: 0,
-      },
+      }
     };
-    let imagePreview = null;
-    if (this.state.imagePreviewUrl) {
-      imagePreview = (<img src={this.state.imagePreviewUrl} />);
-    }
     let actions = [
       <FlatButton
         label="创建团队"
@@ -112,25 +108,11 @@ PublicProject = React.createClass({
     ];
     return (
       <div style={styles.wrap}>
-        {this.checkTeam() ? '' :
-          <Dialog
-            title="团队检测"
-            actions={actions}
-            modal={true}
-            open>
-            由于您还没有团队，所以得先创建团队。
-          </Dialog>
-        }
         <form style={styles.form} onSubmit={this.onSubmit}>
-          <TextField
-            ref="name"
-            floatingLabelText="项目名称"/>
-          <DropDownMenu value={this.state.sort} rer="sort" onChange={this.sortHandleChange}>
-            <MenuItem value={"创新创业"} primaryText="创新创业"/>
-            <MenuItem value={"学科竞赛"} primaryText="学科竞赛"/>
-            <MenuItem value={"课程项目"} primaryText="课程项目"/>
-          </DropDownMenu>
-          <DropDownMenu value={this.state.category} rer="category" onChange={this.handleChange}>
+          {
+            name
+          }
+          <DropDownMenu value={this.state.value} rer="category" onChange={this.handleChange}>
             <MenuItem value={"电商"} primaryText="电商"/>
             <MenuItem value={"O2O"} primaryText="O2O"/>
             <MenuItem value={"互联网金融"} primaryText="互联网金融"/>
@@ -146,24 +128,17 @@ PublicProject = React.createClass({
             <MenuItem value={"广告营销"} primaryText="广告营销"/>
             <MenuItem value={"文化体育娱乐"} primaryText="文化体育娱乐"/>
           </DropDownMenu>
-          <TextField
-            style={{margin:'2rem'}}
-            ref="brief"
-            hintText="请控制在30字以内"
-            onChange={this.checkTextLength}
-            floatingLabelText="项目简述"/>
+          {
+            brief
+          }
           <textarea ref='textarea' rows="50"/>
         </form>
-        {
-          this.data.team.length < 1 ? '' : <SelectTeam items={this.data.team} selectTeam={this.selectTeam}/>
-        }
-        {
-          this.state.team === undefined ? '' :
-            <Paper style={styles.paper} zDepth={this.state.zDepth}>
-              <h1 style={{margin: '0',color: '#03a9f4',overflowWrap: 'break-word'}}>{this.state.team.name}</h1>
-              <p style={{margin: '0',color: '#525457'}}>{'团队人数' + this.state.team.member}</p>
-            </Paper>
-        }
+        {/*
+        <Paper style={styles.paper} zDepth={this.state.zDepth}>
+          <h1 style={{margin: '0',color: '#03a9f4',overflowWrap: 'break-word'}}>{this.data.team.name}</h1>
+          <p style={{margin: '0',color: '#525457'}}>{'团队人数' + this.data.team.member}</p>
+        </Paper>
+        */}
         <div>
           <FlatButton
             label="取消"
@@ -178,44 +153,31 @@ PublicProject = React.createClass({
       </div>
     );
   },
-  deleteImage(){
-    Collections.ProjectImages.remove({_id:'b3EdGps9QtxXAMcdf'},function(err,result){
-      if(!err){
-        console.log("Remove success");
-      }
-    });
-  },
   checkTextLength(event){
     if (event.target.value.length > 30) {
       alert("简述字数超过限制！")
     }
   },
   handleChange(e, index, value){
-    this.setState({category: value})
+    this.setState({value: value})
   },
-  sortHandleChange(e, index, value){
-    this.setState({sort: value})
+  
+  onCancel(){
+    this.history.pushState(null, '/user')
   },
-  // TODO:onCancel function has not created
   onSubmit(){
     let projectinfo = {};
     projectinfo.authorId = Meteor.userId();
     projectinfo.name = this.refs.name.getValue();
-    projectinfo.category = this.state.category;
-    projectinfo.team = this.state.team.id;
-    projectinfo.state = 'closed';
-    // TODO:sort做成下拉菜单
-    projectinfo.sort = this.state.sort;
-    projectinfo.department = Meteor.user().profile.department;
+    projectinfo.category = this.state.value;
     projectinfo.brief = this.refs.brief.getValue();
     projectinfo.description = this.refs.textarea.value;
-    projectinfo.createdAt = new Date();
-    Collections.Projects.insert(projectinfo, (error) => {
+    
+    Collections.Projects.update({_id: this.data.post._id},{$set: projectinfo}, (error) => {
       if (error) {
-        alert(error);
+        alert(error)
       }
-      this.props.history.replaceState(null, '/user');
+      this.history.pushState(null, '/user')
     });
-
   }
 });

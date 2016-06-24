@@ -9,11 +9,15 @@ RegisterPage = React.createClass({
   mixins:[ ReactRouter.History],
   getInitialState(){
     return{
-      value: "学生"
+      value: "学生",
+      department: "软件工程系"
     }
   },
   handleChange (e, index, value){
     this.setState({value:value});
+  },
+  departmentChange (e, index, value){
+    this.setState({department:value});
   },
   render(){
     const styles = {
@@ -38,22 +42,28 @@ RegisterPage = React.createClass({
           type='text'
           hintText='自己最常使用的邮箱'
           floatingLabelText='邮箱'/>
-        <DropDownMenu ref="role" value={this.state.value} onChange={this.handleChange}>
-          <MenuItem value="学生" primaryText="学生"/>
-          <MenuItem value="教师" primaryText="教师"/>
-        </DropDownMenu>
         <TextField
           style={styles.textfield}
           ref='realName'
           type='text'
           hintText='真实姓名'
           floatingLabelText='姓名'/>
-        <TextField
-          style={styles.textfield}
-          ref='grade'
-          type='text'
-          hintText='例：软件工程系'
-          floatingLabelText='专业'/>
+        <DropDownMenu ref="role" value={this.state.value} onChange={this.handleChange}>
+          <MenuItem value="学生" primaryText="学生"/>
+          <MenuItem value="教师" primaryText="教师"/>
+        </DropDownMenu>
+        <DropDownMenu ref="department" value={this.state.department} onChange={this.departmentChange}>
+          <MenuItem value="计算机科学与技术系" primaryText="计算机科学与技术系"/>
+          <MenuItem value="软件工程系" primaryText="软件工程系"/>
+          <MenuItem value="数字艺术系" primaryText="数字艺术系"/>
+          <MenuItem value="电子工程系" primaryText="电子工程系"/>
+          <MenuItem value="信息管理系" primaryText="信息管理系"/>
+          <MenuItem value="商务管理系" primaryText="商务管理系"/>
+          <MenuItem value="英语系" primaryText="英语系"/>
+          <MenuItem value="日语系" primaryText="日语系"/>
+          <MenuItem value="俄语系" primaryText="俄语系"/>
+          <MenuItem value="继续教育学院" primaryText="继续教育学院"/>
+        </DropDownMenu>
         <TextField
           style={styles.textfield}
           ref='password'
@@ -108,9 +118,9 @@ RegisterPage = React.createClass({
       alert('密码格式错误！')
     }
 
-    if(!!this.refs.realName.getValue().trim() && !!this.refs.grade.getValue().trim()){
+    if(!!this.refs.realName.getValue().trim()){
       profile.name = this.refs.realName.getValue().trim();
-      profile.grade = this.refs.grade.getValue().trim();
+      profile.department = this.state.department;
       profile.role = this.state.value;
     }
 
@@ -124,7 +134,6 @@ RegisterPage = React.createClass({
         this.refs.password.clearValue();
         this.refs.email.clearValue();
         this.refs.realName.clearValue();
-        this.refs.grade.clearValue();
         this.refs.rePassword.clearValue();
         this.history.pushState(null, '/home');
       });

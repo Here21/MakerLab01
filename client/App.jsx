@@ -57,7 +57,8 @@ App = React.createClass({
     return this.props.history.isActive('/home') ? '1' :
       this.props.history.isActive('/project') ? '2' :
         this.props.history.isActive('/team') ? '3' :
-          this.props.history.isActive('/join') ? '4' :
+          this.props.history.isActive('/recruit') ? '4' :
+            this.props.history.isActive('/info') ? '6' :
             this.props.history.isActive('/login') ? '5' :
               this.props.history.isActive('/user') ? '5' : '0';
   },

@@ -8,6 +8,7 @@ const {
 const {SvgIcons} = MUI.Libs;
 
 TeamCartInUserPage = React.createClass({
+  mixins: [ReactRouter.History],
   render(){
     let styles = {
       paper:{
@@ -46,13 +47,10 @@ TeamCartInUserPage = React.createClass({
       </Paper>
     )
   },
-  jobOffers(){
-
-  },
   modifyInformation(){
-
+    this.history.pushState(null, `/modify/team/${this.props.item._id}`)
   },
   deleteProject(){
-    Collections.Projects.remove({_id: this.props.item._id})
+    // Collections.Team.remove({_id: this.props.item._id})
   }
 });

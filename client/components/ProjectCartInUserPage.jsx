@@ -8,7 +8,7 @@ const {
 const {SvgIcons} = MUI.Libs;
 
 ProjectCartInUserPage = React.createClass({
-  mixins: [ReactMeteorData],
+  mixins: [ReactMeteorData,ReactRouter.History],
   getMeteorData() {
     let teamId = this.props.item.team;
     Meteor.subscribe("checkTeam", teamId);
@@ -57,6 +57,7 @@ ProjectCartInUserPage = React.createClass({
           >
             <MenuItem primaryText={this.state.stateText} onClick={this.projectPublish}/>
             <MenuItem primaryText="修改信息" onClick={this.modifyInformation}/>
+            <MenuItem primaryText="发布招募" onClick={this.createdRecruit}/>
             <MenuItem primaryText="删除" onClick={this.deleteProject}/>
           </IconMenu>
         </div>
@@ -94,8 +95,11 @@ ProjectCartInUserPage = React.createClass({
       Collections.Projects.update({_id: this.props.item._id},{$set: {state: 'closed'}});
     }
   },
+  createdRecruit(){
+    this.history.pushState(null, `/user/recruit/${this.props.item._id}`)
+  },
   modifyInformation(){
-
+    this.history.pushState(null, `/modify/project/${this.props.item._id}`)
   },
   deleteProject(){
     Collections.Projects.remove({_id: this.props.item._id})

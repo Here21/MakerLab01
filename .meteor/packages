@@ -34,3 +34,6 @@ aldeed:simple-schema
 msavin:mongol
 aldeed:collection2
 izzilab:material-ui@0.2.6
+cfs:standard-packages
+cfs:filesystem
+cfs:graphicsmagick

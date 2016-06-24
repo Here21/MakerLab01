@@ -21,19 +21,23 @@ TeamPost = React.createClass({
   },
 
   render() {
+    let hero;
+    if (this.data.project !== undefined){
+      hero = <PostHero
+        name={this.data.project.name}
+        brief={this.data.project.brief}
+        date={this.data.project.createdAt}
+        type="team"
+      />
+    }
     return (
       <div className="post-page">
-        <PostHero
-          name={this.data.project.name}
-          brief={this.data.project.brief}
-          date={this.data.project.createdAt}
-          type="team"
-        />
-
+        {hero}
         <PostContent content={this.data.project }/>
         {/*
          <CommentBox comments={this.data.comments} postId={this.state.postId}/>
          */}
+        <MemberBar members={this.data.project.member} />
       </div>
     );
   }
